@@ -17,9 +17,11 @@ import {
   Toolbar,
   Paper,
   Slide,
-  FormGroup,
+  Radio,
+  RadioGroup,
+  Divider,
+  FormControl,
   InputLabel,
-  MenuItem,
   Select,
 } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -32,6 +34,24 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     padding: "30px",
+  },
+  shaderRoot: {
+    width: "fit-content",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.text.secondary,
+    "& hr": {
+      margin: theme.spacing(0, 0.5),
+    },
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    minWidth: 200,
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200,
   },
   avatar: {
     margin: theme.spacing(1),
@@ -55,32 +75,33 @@ const useStyles = makeStyles((theme) => ({
 
 export default function OrderForm() {
   const [typesOfRestorations] = useState([
-    { id: 1, type: "Provisional Restorations" },
-    { id: 2, type: "Dentures/Flippers/Flexible Partials" },
-    { id: 3, type: "Nightguards/Retainers" },
-    { id: 4, type: "Snoring/Sleep Apnea Appliances" },
-    { id: 5, type: "Playsafe Mouthguards" },
-    { id: 6, type: "Zirconia/All-Ceramic Restorations" },
-    { id: 7, type: "Vivaneer/Veneer" },
-    { id: 8, type: "PFM" },
-    { id: 9, type: "Screw-Retained Restorations" },
-    { id: 10, type: "Custom Abutments" },
-    { id: 11, type: "Complete Restorations" },
-    { id: 12, type: "Full-cast Restorations" },
-    { id: 13, type: "Simply Natural Metal Partials" },
+    { id: 1, type: "All-Ceramics & Zirconia" },
+    { id: 2, type: "Vivaneer Veneer" },
+    { id: 3, type: "Porcelain Fused to Metal" },
+    { id: 4, type: "Screw-Retained Restorations" },
+    { id: 5, type: "Custom Implant Abutments" },
+    { id: 6, type: "Composite Restorations" },
+    { id: 7, type: "Full-cast Restorations" },
+    { id: 8, type: "Simply Natural Metal Partials" },
   ]);
 
   const [restorationId, setRestorationId] = useState(0);
 
-  const [provisionalState, setProvisionalState] = useState({
-    checkedBioTemp: false,
-    checkedCBTransistion: false,
-    checkedSmileTransistion: false,
-    abutment: 0,
-    pontic: 0,
-    totalUnits: 0,
-    units: "",
-  });
+  const [ceramicRestoration, setCeramicRestoration] = useState("");
+
+  const [finalShade, setfinalShade] = useState("");
+
+  const [stumpShade, setstumpShade] = useState("");
+
+  const [occlusalStaining, setOcclusalStaining] = useState("");
+
+  const handleceramicRestorationChange = (event) => {
+    setCeramicRestoration(event.target.value);
+  };
+
+  const handleocclusalStainingChange = (event) => {
+    setOcclusalStaining(event.target.value);
+  };
 
   function currentId(value) {
     console.log("A name was submitted");
@@ -109,62 +130,123 @@ export default function OrderForm() {
                   paragraph={true}
                   gutterBottom={true}
                 >
-                  Provisionals
+                  All Ceramics & Zirconia
                 </Typography>
-                <FormGroup row>
+                <RadioGroup
+                  aria-label="ceramics"
+                  name="ceramics"
+                  value={ceramicRestoration}
+                  onChange={handleceramicRestorationChange}
+                >
                   <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={provisionalState.checkedA}
-                        name="checkedA"
-                      />
-                    }
-                    label="Transition C & B"
+                    value="option1"
+                    control={<Radio />}
+                    label="BruxZir Full-Strength (1,150 MPa)"
                   />
-                  <div className={classes.root2}>
-                    <TextField
-                      id="abutment"
-                      size="small"
-                      label="Abutment #(s)"
-                    />
-                    <TextField id="pontic" size="small" label="Pontic #(s)" />
-                    <TextField
-                      id="total-units"
-                      size="small"
-                      label="Total Units"
-                    />
-                    <InputLabel id="units">Units</InputLabel>
-                    <Select
-                      labelId="unit-select"
-                      id="unit-select"
-                      value={provisionalState.units}
-                    >
-                      <MenuItem value={1}>Splinted</MenuItem>
-                      <MenuItem value={2}>Individual</MenuItem>
-                    </Select>
-                  </div>
-                </FormGroup>
-                <FormGroup row>
                   <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={provisionalState.checkedA}
-                        name="biotemps-provisionals"
-                      />
-                    }
-                    label="BioTemps Provisionals"
+                    value="option2"
+                    control={<Radio />}
+                    label="BruxZir Esthetic (870 MPa)"
                   />
-                  <InputLabel id="units">Reinforcement</InputLabel>
-                  <Select
-                    labelId="unit-select"
-                    id="unit-select"
-                    value={provisionalState.units}
+                  <FormControlLabel
+                    value="option3"
+                    control={<Radio />}
+                    label="Obsidian All-Ceramic"
+                  />
+                  <FormControlLabel
+                    value="option4"
+                    control={<Radio />}
+                    label="Bilayered Clinical Zirconia"
+                  />
+                  <FormControlLabel
+                    value="option5"
+                    control={<Radio />}
+                    label="IPS e.max (anterior)"
+                  />
+                  <FormControlLabel
+                    value="option6"
+                    control={<Radio />}
+                    label="IPS e.max (posterior)"
+                  />
+                  <FormControlLabel
+                    value="option7"
+                    control={<Radio />}
+                    label="Lava Zirconia"
+                  />
+                </RadioGroup>
+              </Paper>
+            </Grid>
+          </Grid>
+        </Slide>
+        {ceramicRestoration !== "" && renderShadeSection()}
+      </React.Fragment>
+    );
+  }
+
+  function renderShadeSection() {
+    return (
+      <React.Fragment>
+        <Slide direction="right" in={restorationId} mountOnEnter unmountOnExit>
+          <Grid container spacing={3}>
+            <Grid item xs={3}></Grid>
+            <Grid
+              item
+              xs={6}
+              style={{ marginTop: "1rem", marginBottom: "1rem" }}
+            >
+              <Paper elevation={3} style={{ padding: "1rem", width: "100%" }}>
+                <Typography
+                  variant="h5"
+                  component="h5"
+                  paragraph={true}
+                  gutterBottom={true}
+                >
+                  Shading and Occlusal Staining
+                </Typography>
+                <Grid
+                  container
+                  alignItems="center"
+                  className={classes.shaderRoot}
+                >
+                  <TextField
+                    className={classes.textField}
+                    id="final-shade"
+                    label="Final Shade"
+                    variant="outlined"
+                  />
+                  <Divider orientation="vertical" flexItem />
+                  <TextField
+                    className={classes.textField}
+                    id="stump-shade"
+                    label="Stump Shade"
+                    variant="outlined"
+                  />
+                  <Divider orientation="vertical" flexItem />
+                  <FormControl
+                    variant="outlined"
+                    className={classes.formControl}
                   >
-                    <MenuItem value={1}>None</MenuItem>
-                    <MenuItem value={2}>Wire</MenuItem>
-                    <MenuItem value={3}>Fiber</MenuItem>
-                  </Select>
-                </FormGroup>
+                    <InputLabel htmlFor="occlusal-staining">
+                      Occlusal Staining
+                    </InputLabel>
+                    <Select
+                      native
+                      value={occlusalStaining}
+                      onChange={handleocclusalStainingChange}
+                      label="Occlusal Staining"
+                      inputProps={{
+                        name: "occlusalStaining",
+                        id: "occlusal-staining",
+                      }}
+                    >
+                      <option aria-label="None" value="" />
+                      <option value={1}>None</option>
+                      <option value={2}>Light</option>
+                      <option value={3}>Medium</option>
+                      <option value={4}>Dark</option>
+                    </Select>
+                  </FormControl>
+                </Grid>
               </Paper>
             </Grid>
           </Grid>
