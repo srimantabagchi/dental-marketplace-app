@@ -13,6 +13,17 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import TopBar from "../components/TopBar";
+import {ReactComponent as Pontic1Logo} from './../icons/pontic/Pontic1.svg';
+import {ReactComponent as Pontic2Logo} from './../icons/pontic/Pontic2.svg';
+import {ReactComponent as Pontic3Logo} from './../icons/pontic/Pontic3.svg';
+import {ReactComponent as Pontic4Logo} from './../icons/pontic/Pontic4.svg';
+import {ReactComponent as Pontic5Logo} from './../icons/pontic/Pontic5.svg';
+import {ReactComponent as Margin1Logo} from './../icons/margin/Margin1.svg';
+import {ReactComponent as Margin2Logo} from './../icons/margin/Margin2.svg';
+import {ReactComponent as Margin3Logo} from './../icons/margin/Margin3.svg';
+import {ReactComponent as Margin4Logo} from './../icons/margin/Margin4.svg';
+import {ReactComponent as Margin5Logo} from './../icons/margin/Margin5.svg';
+
 import {
   Toolbar,
   Paper,
@@ -23,6 +34,7 @@ import {
   FormControl,
   InputLabel,
   Select,
+    SvgIcon
 } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 //import Header from "../components/Header";
@@ -89,17 +101,43 @@ export default function OrderForm() {
 
   const [ceramicRestoration, setCeramicRestoration] = useState("");
 
-  const [finalShade, setfinalShade] = useState("");
+  const [finalShade, setFinalShade] = useState("");
 
-  const [stumpShade, setstumpShade] = useState("");
+  const [stumpShade, setStumpShade] = useState("");
 
   const [occlusalStaining, setOcclusalStaining] = useState("");
+
+  const [ponticDesign, setPonticDesign] = useState(0);
+
+  const [marginDesign, setMarginDesign] = useState(0);
+
+  const [occlusalClearance, setOcclusalClearance] = useState(0);
 
   const handleceramicRestorationChange = (event) => {
     setCeramicRestoration(event.target.value);
   };
 
-  const handleocclusalStainingChange = (event) => {
+  const handleFinalShade = (event) => {
+    setFinalShade(event.target.value);
+  };
+
+  const handleStumpShade = (event) => {
+    setStumpShade(event.target.value);
+  };
+
+  const handlePonticDesignChange = (event) => {
+    setPonticDesign(event.target.value);
+  };
+
+  const handleMarginDesignChange = (event) => {
+    setMarginDesign(event.target.value);
+  };
+
+  const handleOcclusalClearanceChange = (event) => {
+    setOcclusalClearance(event.target.value);
+  };
+
+  const handleOcclusalStainingChange = (event) => {
     setOcclusalStaining(event.target.value);
   };
 
@@ -130,7 +168,7 @@ export default function OrderForm() {
                   paragraph={true}
                   gutterBottom={true}
                 >
-                  All Ceramics & Zirconia
+                  All Ceramics and Zirconia
                 </Typography>
                 <RadioGroup
                   aria-label="ceramics"
@@ -189,11 +227,7 @@ export default function OrderForm() {
         <Slide direction="right" in={restorationId} mountOnEnter unmountOnExit>
           <Grid container spacing={3}>
             <Grid item xs={3}></Grid>
-            <Grid
-              item
-              xs={6}
-              style={{ marginTop: "1rem", marginBottom: "1rem" }}
-            >
+            <Grid item xs={6}>
               <Paper elevation={3} style={{ padding: "1rem", width: "100%" }}>
                 <Typography
                   variant="h5"
@@ -213,6 +247,7 @@ export default function OrderForm() {
                     id="final-shade"
                     label="Final Shade"
                     variant="outlined"
+                    onChange={handleFinalShade}
                   />
                   <Divider orientation="vertical" flexItem />
                   <TextField
@@ -220,6 +255,7 @@ export default function OrderForm() {
                     id="stump-shade"
                     label="Stump Shade"
                     variant="outlined"
+                    onChange={handleStumpShade}
                   />
                   <Divider orientation="vertical" flexItem />
                   <FormControl
@@ -232,7 +268,7 @@ export default function OrderForm() {
                     <Select
                       native
                       value={occlusalStaining}
-                      onChange={handleocclusalStainingChange}
+                      onChange={handleOcclusalStainingChange}
                       label="Occlusal Staining"
                       inputProps={{
                         name: "occlusalStaining",
@@ -251,7 +287,85 @@ export default function OrderForm() {
             </Grid>
           </Grid>
         </Slide>
+        {finalShade !== "" && stumpShade !== "" && occlusalStaining !== "" && renderPonticSection()}
       </React.Fragment>
+    );
+  }
+
+  function renderPonticSection() {
+    return (
+        <React.Fragment>
+          <Slide direction="right" in={restorationId} mountOnEnter unmountOnExit>
+            <Grid container spacing={3}>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={6}>
+                <Paper elevation={3} style={{ padding: "1rem", width: "100%" }}>
+                  <Typography
+                      variant="h5"
+                      component="h5"
+                      paragraph={true}
+                      gutterBottom={true}
+                  >
+                    Pontic Design
+                  </Typography>
+                  <Grid
+                      container
+                      alignItems="center"
+                      className={classes.shaderRoot}
+                  >
+                  <RadioGroup row aria-label="pontic" name="pontic" value={ponticDesign} onChange={handlePonticDesignChange}>
+                    <FormControlLabel value="1" control={<Radio />} label={<SvgIcon fontSize='large' component={Pontic1Logo} viewBox="0 0 644 862" />} labelPlacement="top" />
+                    <FormControlLabel value="2" control={<Radio />} label={<SvgIcon fontSize='large' component={Pontic2Logo} viewBox="0 0 648 844" />} labelPlacement="top" />
+                    <FormControlLabel value="3" control={<Radio />} label={<SvgIcon fontSize='large' component={Pontic3Logo} viewBox="0 0 628 821" />} labelPlacement="top" />
+                    <FormControlLabel value="4" control={<Radio />} label={<SvgIcon fontSize='large' component={Pontic4Logo} viewBox="0 0 648 846" />} labelPlacement="top" />
+                    <FormControlLabel value="5" control={<Radio />} label={<SvgIcon fontSize='large' component={Pontic5Logo} viewBox="0 0 684 847" />} labelPlacement="top" />
+                  </RadioGroup>
+
+                  </Grid>
+                </Paper>
+              </Grid>
+            </Grid>
+          </Slide>
+          {ponticDesign !== 0 && renderMarginDesignSection()}
+        </React.Fragment>
+    );
+  }
+
+  function renderMarginDesignSection() {
+    return (
+        <React.Fragment>
+          <Slide direction="right" in={restorationId} mountOnEnter unmountOnExit>
+            <Grid container spacing={3}>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={6}>
+                <Paper elevation={3} style={{ padding: "1rem", width: "100%" }}>
+                  <Typography
+                      variant="h5"
+                      component="h5"
+                      paragraph={true}
+                      gutterBottom={true}
+                  >
+                    Margin and Metal Design
+                  </Typography>
+                  <Grid
+                      container
+                      alignItems="center"
+                      className={classes.shaderRoot}
+                  >
+                    <RadioGroup row aria-label="margin" name="margin" value={marginDesign} onChange={handleMarginDesignChange}>
+                      <FormControlLabel value="1" control={<Radio />} label={<SvgIcon fontSize='large' component={Margin1Logo} viewBox="0 0 644 862" />} labelPlacement="top" />
+                      <FormControlLabel value="2" control={<Radio />} label={<SvgIcon fontSize='large' component={Margin2Logo} viewBox="0 0 648 844" />} labelPlacement="top" />
+                      <FormControlLabel value="3" control={<Radio />} label={<SvgIcon fontSize='large' component={Margin3Logo} viewBox="0 0 628 821" />} labelPlacement="top" />
+                      <FormControlLabel value="4" control={<Radio />} label={<SvgIcon fontSize='large' component={Margin4Logo} viewBox="0 0 648 846" />} labelPlacement="top" />
+                      <FormControlLabel value="5" control={<Radio />} label={<SvgIcon fontSize='large' component={Margin5Logo} viewBox="0 0 684 847" />} labelPlacement="top" />
+                    </RadioGroup>
+
+                  </Grid>
+                </Paper>
+              </Grid>
+            </Grid>
+          </Slide>
+        </React.Fragment>
     );
   }
 
