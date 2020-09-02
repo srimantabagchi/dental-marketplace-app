@@ -345,7 +345,7 @@ export default function OrderForm() {
                       paragraph={true}
                       gutterBottom={true}
                   >
-                    Margin and Metal Design Test
+                    Margin and Metal Design
                   </Typography>
                   <Grid
                       container
