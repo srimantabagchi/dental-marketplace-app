@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import TopBar from "../components/TopBar";
+import Teeth from "../components/Teeth";
 import {ReactComponent as Pontic1Logo} from './../icons/pontic/Pontic1.svg';
 import {ReactComponent as Pontic2Logo} from './../icons/pontic/Pontic2.svg';
 import {ReactComponent as Pontic3Logo} from './../icons/pontic/Pontic3.svg';
@@ -112,6 +113,8 @@ export default function OrderForm() {
   const [marginDesign, setMarginDesign] = useState(0);
 
   const [occlusalClearance, setOcclusalClearance] = useState(0);
+
+  const [teethNumber, setTeethNumber] = useState(0);
 
   const handleceramicRestorationChange = (event) => {
     setCeramicRestoration(event.target.value);
@@ -365,8 +368,35 @@ export default function OrderForm() {
               </Grid>
             </Grid>
           </Slide>
+          {marginDesign !== 0 && teethSelectionSection()}
         </React.Fragment>
     );
+  }
+
+  function teethSelectionSection(){
+    return(
+        <React.Fragment>
+          <Slide direction="right" in={restorationId} mountOnEnter unmountOnExit>
+            <Grid container spacing={3}>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={6}>
+                <Paper elevation={3} style={{ padding: "1rem", width: "100%" }}>
+                  <Typography
+                      variant="h5"
+                      component="h5"
+                      paragraph={true}
+                      gutterBottom={true}
+                  >
+                    Tooth Selection
+                  </Typography>
+                  <Teeth onChange={(value) => setTeethNumber(value)}/>
+                  <TextField disabled id="teeth-number" label="Teeth Number" variant="filled" value={teethNumber}/>
+                </Paper>
+              </Grid>
+            </Grid>
+          </Slide>
+        </React.Fragment>
+    )
   }
 
   function renderId2() {
