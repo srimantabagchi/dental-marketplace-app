@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import {
   Avatar,
@@ -36,6 +37,11 @@ const useStyles = makeStyles((theme) => ({
 
 const TopBar = (props) => {
   const classes = useStyles();
+
+  const history = useHistory();
+  const handleClickSignIn = () => history.push("/signin");
+  const handleClickSignUp = () => history.push("/signup");
+
   return (
     <React.Fragment>
       <AppBar
@@ -53,10 +59,14 @@ const TopBar = (props) => {
               </Typography>
             </Grid>
             <Grid item>
-              <Button color="inherit">Login</Button>
+              <Button color="inherit" onClick={handleClickSignIn}>
+                Login
+              </Button>
             </Grid>
             <Grid item>
-              <Button color="inherit">Register</Button>
+              <Button color="inherit" onClick={handleClickSignUp}>
+                Register
+              </Button>
             </Grid>
           </Grid>
         </Toolbar>
