@@ -14,7 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import TopBar from "../components/TopBar";
 import { Toolbar } from "@material-ui/core";
-import { signInWithGoogle } from "./../firebase/firebase.utils";
+import { signInWithGoogle } from "../config/fbConfig";
 //import Header from "../components/Header";
 
 const useStyles = makeStyles((theme) => ({
